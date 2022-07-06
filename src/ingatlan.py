@@ -20,7 +20,7 @@ def get_page(url):
     proxy = random.choice(proxies)
 
     options = Options()
-    # options.add_argument("--headless")
+    options.add_argument("--headless")
     options.add_argument(f"--proxy-server={proxy}")
     options.add_argument("--disable-notifications")
     options.add_argument("disable-infobars")
