@@ -15,13 +15,13 @@ async def show(proxies):
 proxies = asyncio.Queue()
 broker = Broker(proxies)
 tasks = asyncio.gather(
-    broker.find(types=['HTTP', 'HTTPS'], limit=200),
+    broker.find(types=['HTTP', 'HTTPS'], limit=100),
     show(proxies))
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(tasks)
 
-with open("src/utils/proxies.txt", "w") as outfile:
+with open("src/utils/proxies.txt", "a") as outfile:
     for p in ps:
         outfile.write(p.host + ":" + str(p.port) + "\n")
 

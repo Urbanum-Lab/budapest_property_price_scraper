@@ -9,6 +9,8 @@ from selenium.webdriver.chrome.options import Options
 with open("src/utils/proxies.txt") as infile:
     proxies = infile.read().strip().split("\n")
 
+proxies = list(set(proxies))
+print(len(proxies))
 # hardcoded & as ugly as hell
 property_feats = {"lakas": 1368,
                   "haz": 372}
@@ -25,7 +27,7 @@ def get_page(url):
     driver = webdriver.Chrome(chrome_options=options)
 
     driver.get(url)
-    time.sleep(random.randint(2, 6))
+    time.sleep(random.randint(3, 7))
     html = driver.page_source
     driver.close()
     return html
@@ -63,18 +65,24 @@ def get_page_data(page_url):
 
 urls = []
 for property_type, page_num in property_feats.items():
+    print(property_type)
     for i in range(1, page_num+1):
         page_url = f"https://ingatlan.com/szukites/elado+{property_type}+budapest?page={i}"
         urls.append(page_url)
 
+print(len(urls))
+
 futures = []
-with ThreadPoolExecutor(max_workers=5) as ex:
+with ThreadPoolExecutor(max_workers=80) as ex:
     for url in urls:
         futures.append(ex.submit(get_page_data, url))
 
 
 with open("data/ingatlan_sqrm_price.tsv", "w") as outfile:
     for future in futures:
-        if future:
-            for e in future:
-                outfile.write(future)
+        res = future.result()
+        if res:
+            for e in res:
+                outfile.write(e)
+        else:
+            print("none")

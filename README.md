@@ -7,6 +7,7 @@ The scraper collects only the address and
 the square meter prices for each listing.
 
 ## How to use the scraper
+- you need python 3.9+ on your system
 - use `pipenv` to install the requirements
 - run `src/utils/get_proxies.py` to get a list
 of free proxies
