@@ -106,3 +106,4 @@ ENV/
 assets/
 data/
 render/
+.idea/
