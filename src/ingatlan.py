@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import random
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -47,6 +48,7 @@ def get_page_data(page_url):
             pt = "lakas"
         else:
             pt = "haz"
+        page_i = page_url.split("=")[1]
         page_at_i = get_page_p(page_url)
         soup = BeautifulSoup(page_at_i, "lxml")
         addresses = soup.find_all("div", {"class": "listing__address"})
@@ -57,7 +59,7 @@ def get_page_data(page_url):
             res = []
             m2prices = [e.text.strip() for e in m2prices]
             for e in zip(addresses, m2prices):
-                o = e[0] + "\t" + e[1] + "\t" + pt + "\n"
+                o = e[0] + "\t" + e[1] + "\t" + pt + "\t" + page_i + "\n"
                 res.append(o)
             # print("\n".join(res))
             print("ok")
@@ -82,7 +84,7 @@ with ThreadPoolExecutor(max_workers=55) as ex:
         futures.append(ex.submit(get_page_data, url))
 
 
-with open("data/ingatlan_sqrm_price.tsv", "a") as outfile:
+with open("data/ingatlan_sqrm_price_more.tsv", "a") as outfile:
     for future in futures:
         res = future.result()
         if res:

@@ -8,6 +8,8 @@ selenium = "*"
 proxybroker = "*"
 bs4 = "*"
 lxml = "*"
+pandas = "*"
+geocoder = "*"
 
 [dev-packages]
 black = "*"
