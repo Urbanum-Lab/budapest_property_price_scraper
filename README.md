@@ -1,4 +1,4 @@
-# Scrape square meter prices
+# Scrape square meter prices [Kludgery]
 This project tries to scrape square meter
 prices in Budapest. Its source is the
 biggest real estate site in Hungary.
@@ -19,6 +19,8 @@ and houses in Budapest
 - save a deduplicated version `sort ingatlan_sqrm_price_more.tsv | uniq -c > unique.tsv`
 - run `src/geocoding.py` on the deduped tsv to get
 lat long data and clean up the tsv
+- `geocoding.py` aggregates square meter prices
+on various h3 resolutions
 
 ## Warning
 - This code comes with absolutely no warranty!

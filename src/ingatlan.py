@@ -13,8 +13,7 @@ with open("src/utils/proxies.txt") as infile:
 proxies = list(set(proxies))
 print(f"we have {len(proxies)} proxies")
 # hardcoded & as ugly as hell
-property_feats = {"lakas": 1368,
-                  "haz": 372}
+property_feats = {"lakas": 1368, "haz": 372}
 
 
 def get_page(url):
@@ -72,8 +71,10 @@ def get_page_data(page_url):
 urls = []
 for property_type, page_num in property_feats.items():
     print(property_type)
-    for i in range(1, page_num+1):
-        page_url = f"https://ingatlan.com/szukites/elado+{property_type}+budapest?page={i}"
+    for i in range(1, page_num + 1):
+        page_url = (
+            f"https://ingatlan.com/szukites/elado+{property_type}+budapest?page={i}"
+        )
         urls.append(page_url)
 
 print(len(urls))

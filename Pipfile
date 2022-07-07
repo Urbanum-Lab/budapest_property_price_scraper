@@ -10,6 +10,7 @@ bs4 = "*"
 lxml = "*"
 pandas = "*"
 geocoder = "*"
+h3 = "*"
 
 [dev-packages]
 black = "*"
