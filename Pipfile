@@ -11,6 +11,8 @@ lxml = "*"
 pandas = "*"
 geocoder = "*"
 h3 = "*"
+pydeck = "*"
+matplotlib = "*"
 
 [dev-packages]
 black = "*"
