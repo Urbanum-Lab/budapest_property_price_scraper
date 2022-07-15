@@ -121,19 +121,5 @@ df["l13"] = l13
 df["l14"] = l14
 df["l15"] = l15
 
-df.to_csv("data/ingatlan_cleaned_geocoded.tsv",
-          index=False,
-          sep="\t")
+df.to_csv("data/ingatlan_cleaned_geocoded.tsv", index=False, sep="\t")
 print("data is ready")
-
-df2publish = df[["type", "district", "price", "l5", "l6", "l7", "l8", "l9", "l10",
-                 "l11", "l12", "l13", "l14", "l15"]]
-
-areas = ["l5", "l6", "l7", "l8", "l9", "l10", "l11", "l12", "l13", "l14", "l15"]
-
-for hash in areas:
-    df2save = df2publish.groupby(hash).mean()
-    df2save.reset_index(inplace=True, level=[hash])
-    df2save.to_csv(f"data/aggregated/{hash}.tsv",
-              index=False,
-              sep="\t")

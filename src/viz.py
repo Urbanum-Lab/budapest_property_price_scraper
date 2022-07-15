@@ -14,18 +14,21 @@ for f in infiles:
         df,
         get_hexagon=f"{f.split('.')[0]}",
         auto_highlight=True,
-        elevation_scale=10,
+        # elevation_scale=10,
         pickable=True,
-        elevation_range=[min(df["price"]), max(df["price"])],
+        # elevation_range=[min(df["price"]), max(df["price"])],
         extruded=True,
         coverage=0.8,
         opacity=0.01,
-        get_fill_color="[0, 255, price]"
+        get_fill_color="[255 - (price/10000), 255, (price/10000)]",
     )
 
-    view_state = pdk.ViewState(latitude=47.500000, longitude=19.040236,
-                               zoom=10, bearing=0, pitch=35)
-    r = pdk.Deck(layers=[layer],
-                 initial_view_state=view_state,
-                 tooltip={"text": "square meter price: {price}"})
+    view_state = pdk.ViewState(
+        latitude=47.500000, longitude=19.040236, zoom=10, bearing=0, pitch=35
+    )
+    r = pdk.Deck(
+        layers=[layer],
+        initial_view_state=view_state,
+        tooltip={"text": "square meter price: {price}"},
+    )
     r.to_html(f"vizs/{f.split('.')[0]}.html")
